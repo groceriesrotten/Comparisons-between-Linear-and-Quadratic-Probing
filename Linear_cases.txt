@@ -1,0 +1,113 @@
+Setup & Parameters
+
+Table Size(M): 11 indices ( 0 through 10)
+Hash Function:
+Probing formula: index = (intialHash + i) mod 11 where i = 0,1,2....
+
+Keys & ASCII Calculations
+Mia	'M'(77) + 'i'(105) + 'a'(97)	279	4
+Tim	'T'(84) + 'i'(105) + 'm'(109)	298	1
+Bea	'B'(66) + 'e'(101) + 'a'(97)	264	0
+Zoe	'Z'(90) + 'o'(111) + 'e'(101)	302	5
+Sue	'S'(83) + 'u'(117) + 'e'(101)	301	4
+Len	'L'(76) + 'e'(101) + 'n'(110)	287	1
+Moe	'M'(77) + 'o'(111) + 'e'(101)	289	3
+Lou	'L'(76) + 'o'(111) + 'u'(117)	304	7
+Rae	'R'(82) + 'a'(97) + 'e'(101)	280	5
+Max	'M'(77) + 'a'(97) + 'x'(120)	294	8
+Tod	'T'(84) + 'o'(111) + 'd'(100)	295	9
+
+Step-by-Step Insertion Cases
+Case 1: Insert "Mia" (Initial Hash = 4)
+
+    Probe 0 (i=0): (4 + 0) mod 11 = 4.
+
+    Status: Slot [4] is EMPTY.
+
+    Action: Placed at Index 4.
+
+Case 2: Insert "Tim" (Initial Hash = 1)
+
+    Probe 0 (i=0): (1 + 0) mod 11 = 1.
+
+    Status: Slot [1] is EMPTY.
+
+    Action: Placed at Index 1.
+
+Case 3: Insert "Bea" (Initial Hash = 0)
+
+    Probe 0 (i=0): (0 + 0) mod 11 = 0.
+
+    Status: Slot [0] is EMPTY.
+
+    Action: Placed at Index 0.
+
+Case 4: Insert "Zoe" (Initial Hash = 5)
+
+    Probe 0 (i=0): (5 + 0) mod 11 = 5.
+
+    Status: Slot [5] is EMPTY.
+
+    Action: Placed at Index 5.
+
+Case 5: Insert "Sue" (Initial Hash = 4) — Collision
+
+    Probe 0 (i=0): (4 + 0) mod 11 = 4 → OCCUPIED by "Mia".
+
+    Probe 1 (i=1): (4 + 1) mod 11 = 5 → OCCUPIED by "Zoe".
+
+    Probe 2 (i=2): (4 + 2) mod 11 = 6 → EMPTY.
+
+    Action: Placed at Index 6 (after 2 collisions).
+
+Case 6: Insert "Len" (Initial Hash = 1) — Collision
+
+    Probe 0 (i=0): (1 + 0) mod 11 = 1 → OCCUPIED by "Tim".
+
+    Probe 1 (i=1): (1 + 1) mod 11 = 2 → EMPTY.
+
+    Action: Placed at Index 2 (after 1 collision).
+
+Case 7: Insert "Moe" (Initial Hash = 3)
+
+    Probe 0 (i=0): (3 + 0) mod 11 = 3.
+
+    Status: Slot [3] is EMPTY.
+
+    Action: Placed at Index 3.
+
+Case 8: Insert "Lou" (Initial Hash = 7)
+
+    Probe 0 (i=0): (7 + 0) mod 11 = 7.
+
+    Status: Slot [7] is EMPTY.
+
+    Action: Placed at Index 7.
+
+Case 9: Insert "Rae" (Initial Hash = 5) — Cluster Collision
+
+    Probe 0 (i=0): (5 + 0) mod 11 = 5 → OCCUPIED by "Zoe".
+
+    Probe 1 (i=1): (5 + 1) mod 11 = 6 → OCCUPIED by "Sue".
+
+    Probe 2 (i=2): (5 + 2) mod 11 = 7 → OCCUPIED by "Lou".
+
+    Probe 3 (i=3): (5 + 3) mod 11 = 8 → EMPTY.
+
+    Action: Placed at Index 8 (after 3 collisions).
+
+Case 10: Insert "Max" (Initial Hash = 8) — Collision
+
+    Probe 0 (i=0): (8 + 0) mod 11 = 8 → OCCUPIED by "Rae".
+
+    Probe 1 (i=1): (8 + 1) mod 11 = 9 → EMPTY.
+
+    Action: Placed at Index 9 (after 1 collision).
+
+Case 11: Insert "Tod" (Initial Hash = 9) — Collision
+
+    Probe 0 (i=0): (9 + 0) mod 11 = 9 → OCCUPIED by "Max".
+
+    Probe 1 (i=1): (9 + 1) mod 11 = 10 → EMPTY.
+
+    Action: Placed at Index 10 (after 1 collision)
