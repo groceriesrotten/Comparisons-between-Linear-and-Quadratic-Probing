@@ -1,0 +1,108 @@
+Case-by-case trace (same keys, same table size M = 11)
+
+Hash values (from your earlier table):
+Key	Initial Hash
+Mia	4
+Tim	1
+Bea	0
+Zoe	5
+Sue	4
+Len	1
+Moe	3
+Lou	7
+Rae	5
+Max	8
+Tod	9
+
+Probe offsets for i = 0,1,2,3,4,…: 0, 1, 4, 9, 16→5, 25→3, 36→3, … (mod 11).
+Case 1: Insert "Mia" (h = 4)
+
+    Probe 0 (i=0): (4 + 0) mod 11 = 4 → EMPTY.
+
+    Placed at Index 4.
+
+Case 2: Insert "Tim" (h = 1)
+
+    Probe 0 (i=0): (1 + 0) mod 11 = 1 → EMPTY.
+
+    Placed at Index 1.
+
+Case 3: Insert "Bea" (h = 0)
+
+    Probe 0 (i=0): (0 + 0) mod 11 = 0 → EMPTY.
+
+    Placed at Index 0.
+
+Case 4: Insert "Zoe" (h = 5)
+
+    Probe 0 (i=0): (5 + 0) mod 11 = 5 → EMPTY.
+
+    Placed at Index 5.
+
+Case 5: Insert "Sue" (h = 4) — Collision
+
+    Probe 0 (i=0): (4 + 0) mod 11 = 4 → OCCUPIED by Mia.
+
+    Probe 1 (i=1): (4 + 1) mod 11 = 5 → OCCUPIED by Zoe.
+
+    Probe 2 (i=2): (4 + 4) mod 11 = 8 → EMPTY.
+
+    Placed at Index 8 (after 2 collisions). (Linear probing put Sue at 6 — quadratic jumps to 8.)
+
+Case 6: Insert "Len" (h = 1) — Collision
+
+    Probe 0 (i=0): (1 + 0) mod 11 = 1 → OCCUPIED by Tim.
+
+    Probe 1 (i=1): (1 + 1) mod 11 = 2 → EMPTY.
+
+    Placed at Index 2 (after 1 collision).
+
+Case 7: Insert "Moe" (h = 3)
+
+    Probe 0 (i=0): (3 + 0) mod 11 = 3 → EMPTY.
+
+    Placed at Index 3.
+
+Case 8: Insert "Lou" (h = 7)
+
+    Probe 0 (i=0): (7 + 0) mod 11 = 7 → EMPTY.
+
+    Placed at Index 7.
+
+Case 9: Insert "Rae" (h = 5) — Cluster Collision
+
+    Probe 0 (i=0): (5 + 0) mod 11 = 5 → OCCUPIED by Zoe.
+
+    Probe 1 (i=1): (5 + 1) mod 11 = 6 → EMPTY.
+
+    Placed at Index 6 (after 1 collision). (Linear probing needed 3 probes and landed at 8 — here quadratic finds 6 immediately.)
+
+Case 10: Insert "Max" (h = 8) — Collision
+
+    Probe 0 (i=0): (8 + 0) mod 11 = 8 → OCCUPIED by Sue.
+
+    Probe 1 (i=1): (8 + 1) mod 11 = 9 → EMPTY.
+
+    Placed at Index 9 (after 1 collision).
+
+Case 11: Insert "Tod" (h = 9) — Collision
+
+    Probe 0 (i=0): (9 + 0) mod 11 = 9 → OCCUPIED by Max.
+
+    Probe 1 (i=1): (9 + 1) mod 11 = 10 → EMPTY.
+
+    Placed at Index 10 (after 1 collision).
+
+Final Hash Table State (Quadratic Probing)
+Index	Stored Key	Status
+[ 0]	Bea	ACTIVE
+[ 1]	Tim	ACTIVE
+[ 2]	Len	ACTIVE
+[ 3]	Moe	ACTIVE
+[ 4]	Mia	ACTIVE
+[ 5]	Zoe	ACTIVE
+[ 6]	Rae	ACTIVE
+[ 7]	Lou	ACTIVE
+[ 8]	Sue	ACTIVE
+[ 9]	Max	ACTIVE
+[10]	Tod	ACTIVE
